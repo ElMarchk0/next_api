@@ -11,7 +11,7 @@ import { PrimaryGeneratedColumn } from 'typeorm';
 export class CreateUserDto {
   // Patient Id
   @PrimaryGeneratedColumn()
-  id: number;
+  userId: string;
 
   // Personal Health Number
   @IsNumberString()
@@ -23,15 +23,15 @@ export class CreateUserDto {
   // Can Eat
   @IsNotEmpty()
   @IsBoolean({ message: 'Please confirm if patient can eat' })
-  canEat: boolean;
+  canEat?: boolean;
 
   // Can Drink
   @IsNotEmpty()
   @IsBoolean({ message: 'Please confirm if patient can drink' })
-  canDrink: boolean;
+  canDrink?: boolean;
 
   // Status
   @IsNotEmpty()
   @IsString()
-  status: string;
+  status?: string;
 }

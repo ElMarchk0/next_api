@@ -1,5 +1,7 @@
 import {
   IsBoolean,
+  IsDate,
+  IsDateString,
   IsNotEmpty,
   IsNumberString,
   IsString,
@@ -34,4 +36,9 @@ export class CreateUserDto {
   @IsNotEmpty()
   @IsString()
   status?: string;
+
+  // Admission
+  @IsNotEmpty()
+  @IsDateString()
+  admission: Date;
 }

@@ -6,7 +6,10 @@ export class User {
   id: string;
 
   @Column({ type: 'int64' })
-  personalHeathNum: number;
+  personalHeathNumber: number;
+
+  @Column({ type: 'datetime', nullable: false })
+  admission: Date;
 
   @Column({ type: 'boolean' })
   canEat: boolean;
@@ -18,7 +21,6 @@ export class User {
   @Column({ type: 'string' })
   status: string;
 
-  // May move to facility
-  @Column({ type: 'varchar', length: 40 })
-  location: string;
+  @Column({ type: 'datetime', nullable: true })
+  statusUpdated: Date;
 }

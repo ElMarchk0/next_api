@@ -34,9 +34,8 @@ export class UserService {
       throw new NotFoundException(`User with ID ${id} not found`);
     }
 
-    user.status = updateUserDto.status; // Assuming UpdateUserDto has a 'status' field
-    await this.userRepository.save(user);
-
+    user.status = updateUserDto.status;
+    user.statusUpdated = new Date();
     return user;
   }
   public async updateCanEat(
@@ -47,7 +46,8 @@ export class UserService {
     if (!user) {
       throw new NotFoundException(`User with ID ${id} not found`);
     }
-    user.canEat = updateUserDto.canEat; // Assuming UpdateUserDto has a 'status' field
+    user.canEat = updateUserDto.canEat;
+    user.statusUpdated = new Date();
     await this.userRepository.save(user);
     return user;
   }
@@ -59,7 +59,8 @@ export class UserService {
     if (!user) {
       throw new NotFoundException(`User with ID ${id} not found`);
     }
-    user.canDrink = updateUserDto.canDrink; // Assuming UpdateUserDto has a 'status' field
+    user.canDrink = updateUserDto.canDrink;
+    user.statusUpdated = new Date();
     await this.userRepository.save(user);
     return user;
   }

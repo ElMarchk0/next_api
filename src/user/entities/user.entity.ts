@@ -1,14 +1,14 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryColumn } from 'typeorm';
 
 @Entity()
 export class User {
-  @PrimaryGeneratedColumn()
+  @PrimaryColumn({ type: 'text' })
   id: string;
 
-  @Column({ type: 'int64' })
-  personalHeathNumber: number;
+  @Column({ type: 'int' })
+  personalHealthNumber: number;
 
-  @Column({ type: 'datetime', nullable: false })
+  @Column({ type: 'timestamp', nullable: false })
   admission: Date;
 
   @Column({ type: 'boolean' })
@@ -18,9 +18,9 @@ export class User {
   canDrink: boolean;
 
   // May change to enum later
-  @Column({ type: 'string' })
+  @Column({ type: 'text' })
   status: string;
 
-  @Column({ type: 'datetime', nullable: true })
+  @Column({ type: 'timestamp', nullable: true })
   statusUpdated: Date;
 }

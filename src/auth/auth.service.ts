@@ -7,7 +7,7 @@ export class AuthService {
 
   async validateUser(
     userId: string,
-    personalHeathNumber: number,
+    personalHealthNumber: number,
   ): Promise<any> {
     return null;
   }

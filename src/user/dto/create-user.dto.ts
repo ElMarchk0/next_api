@@ -1,18 +1,17 @@
 import {
   IsBoolean,
   IsDate,
-  IsDateString,
   IsNotEmpty,
   IsNumberString,
   IsString,
   MaxLength,
   MinLength,
 } from 'class-validator';
-import { PrimaryGeneratedColumn } from 'typeorm';
+import { PrimaryColumn } from 'typeorm';
 
 export class CreateUserDto {
   // Patient Id
-  @PrimaryGeneratedColumn()
+  @PrimaryColumn()
   userId: string;
 
   // Personal Health Number
@@ -20,7 +19,7 @@ export class CreateUserDto {
   @IsNotEmpty()
   @MinLength(10, { message: 'Incorrect number of digits in PHN' })
   @MaxLength(10, { message: 'Incorrect number of digits in PHN' })
-  personalHeathNumber: number;
+  personalHealthNumber: number;
 
   // Can Eat
   @IsNotEmpty()
@@ -39,6 +38,6 @@ export class CreateUserDto {
 
   // Admission
   @IsNotEmpty()
-  @IsDateString()
+  @IsDate()
   admission: Date;
 }

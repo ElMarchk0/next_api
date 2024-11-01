@@ -4,7 +4,6 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { FacilityModule } from './facility/facility.module';
-import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -14,14 +13,13 @@ import { AuthModule } from './auth/auth.module';
       port: 5432,
       password: 'NextTest2024',
       username: 'next',
-      entities: [],
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
       database: 'next_api',
       synchronize: true,
       logging: true,
     }),
     UserModule,
     FacilityModule,
-    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

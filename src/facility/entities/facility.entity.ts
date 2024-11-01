@@ -14,6 +14,6 @@ export class Facility {
   @Column({ type: 'decimal' })
   averageAppointmentTime: number;
 
-  @Column({ type: 'array' })
+  @Column({ type: 'text', array: true })
   patients: string[];
 }

@@ -28,17 +28,32 @@ export class UserController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.userService.findOne(+id);
+    return this.userService.findOne(id);
   }
 
   // Update user status
-  @Patch(':id')
-  update(@Body() updateUserDto: UpdateUserDto, @Req() req: Request) {
-    return this.userService.updateStatus(updateUserDto, req);
+  @Patch(':id/status')
+  updateStatus(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+    return this.userService.updateStatus(id, updateUserDto);
+  }
+
+  // Update user can eat
+  @Patch(':id/can_eat')
+  updateCanEat(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+    return this.userService.updateCanEat(id, updateUserDto);
+  }
+
+  // Update user can drink
+  @Patch(':id/can_drink')
+  updateCanDrink(
+    @Param('id') id: string,
+    @Body() updateUserDto: UpdateUserDto,
+  ) {
+    return this.userService.updateCanEat(id, updateUserDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.userService.remove(+id);
+  remove(@Req() req: Request) {
+    return this.userService.remove(req);
   }
 }

@@ -7,13 +7,7 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
-import { PrimaryColumn } from 'typeorm';
-
 export class CreateUserDto {
-  // Patient Id
-  @PrimaryColumn()
-  userId: string;
-
   // Personal Health Number
   @IsNumberString()
   @IsNotEmpty()

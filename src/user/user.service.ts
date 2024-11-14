@@ -1,5 +1,4 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { v4 as uuidv4 } from 'uuid';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
@@ -19,7 +18,6 @@ export class UserService {
     const { personalHealthNumber, status, canDrink, canEat }: CreateUserDto =
       body;
     let user: User = new User();
-    user.id = uuidv4().split('-')[0];
     user.personalHealthNumber = personalHealthNumber;
     user.status = status;
     user.canDrink = canDrink;

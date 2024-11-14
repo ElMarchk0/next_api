@@ -1,11 +1,17 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm';
-
+import {
+  BeforeInsert,
+  Column,
+  Entity,
+  PrimaryColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { v4 as uuidv4 } from 'uuid';
 @Entity()
 export class User {
-  @PrimaryColumn({ type: 'text' })
+  @PrimaryColumn('uuid')
   id: string;
 
-  @Column({ type: 'int' })
+  @Column({ type: 'int', unique: true })
   personalHealthNumber: number;
 
   @Column({ type: 'timestamp', nullable: false })
@@ -21,6 +27,11 @@ export class User {
   @Column({ type: 'text' })
   status: string;
 
-  @Column({ type: 'timestamp', nullable: true })
+  @UpdateDateColumn({ type: 'timestamp', nullable: true })
   statusUpdated: Date;
+
+  @BeforeInsert()
+  generateId() {
+    this.id = uuidv4().split('-')[0];
+  }
 }

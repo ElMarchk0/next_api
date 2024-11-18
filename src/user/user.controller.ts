@@ -49,11 +49,11 @@ export class UserController {
     @Param('id') id: string,
     @Body() updateUserDto: UpdateUserDto,
   ) {
-    return this.userService.updateCanEat(id, updateUserDto);
+    return this.userService.updateCanDrink(id, updateUserDto);
   }
 
   @Delete(':id')
-  remove(@Req() req: Request) {
-    return this.userService.remove(req);
+  remove(@Param('id') id: string) {
+    return this.userService.remove(id);
   }
 }

@@ -8,11 +8,11 @@ import {
 import { v4 as uuidv4 } from 'uuid';
 @Entity()
 export class User {
-  @PrimaryColumn('uuid')
+  @PrimaryColumn('text')
   id: string;
 
-  @Column({ type: 'int', unique: true })
-  personalHealthNumber: number;
+  @Column({ type: 'text', unique: true })
+  personalHealthNumber: string;
 
   @Column({ type: 'timestamp', nullable: false })
   admission: Date;

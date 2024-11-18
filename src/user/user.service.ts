@@ -36,6 +36,7 @@ export class UserService {
     user.statusUpdated = new Date();
     return user;
   }
+
   public async updateCanEat(
     id: string,
     updateUserDto: UpdateUserDto,
@@ -49,6 +50,7 @@ export class UserService {
     await this.userRepository.save(user);
     return user;
   }
+
   public async updateCanDrink(
     id: string,
     updateUserDto: UpdateUserDto,
@@ -71,8 +73,8 @@ export class UserService {
     return user;
   }
 
-  async remove(req: Request): Promise<User> {
-    const user: User = <User>req.user;
+  async remove(id: string): Promise<User> {
+    const user = await this.userRepository.findOne({ where: { id } });
     if (!user) {
       throw new NotFoundException(`User with ID ${user.id} not found`);
     }

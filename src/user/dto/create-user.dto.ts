@@ -2,18 +2,17 @@ import {
   IsBoolean,
   IsDate,
   IsNotEmpty,
-  IsNumberString,
   IsString,
   MaxLength,
   MinLength,
 } from 'class-validator';
 export class CreateUserDto {
   // Personal Health Number
-  @IsNumberString()
+  @IsString()
   @IsNotEmpty()
-  @MinLength(10, { message: 'Incorrect number of digits in PHN' })
-  @MaxLength(10, { message: 'Incorrect number of digits in PHN' })
-  personalHealthNumber: number;
+  @MinLength(10)
+  @MaxLength(10)
+  personalHealthNumber: string;
 
   // Can Eat
   @IsNotEmpty()

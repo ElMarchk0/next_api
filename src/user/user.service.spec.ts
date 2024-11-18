@@ -37,7 +37,7 @@ describe('UserService', () => {
         canDrink: true,
         canEat: true,
         admission: new Date(),
-        personalHealthNumber: 9231299312,
+        personalHealthNumber: '9231299312',
       };
       const user = new User();
       mockUserRepository.save.mockResolvedValue(user);
@@ -72,12 +72,11 @@ describe('UserService', () => {
   describe('remove', () => {
     it('should remove the user if exists', async () => {
       const user = new User();
-      mockUserRepository.remove.mockResolvedValue(user);
-
-      const req = { user } as any;
-      const result = await service.remove(req);
+      user.id = '1';
+      mockUserRepository.findOne.mockResolvedValue(user);
+      const result = await service.remove('1');
       expect(mockUserRepository.remove).toHaveBeenCalledWith(user);
-      expect(result).toBe(user);
+      expect(result).toBe(undefined);
     });
   });
 });

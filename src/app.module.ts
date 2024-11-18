@@ -13,7 +13,7 @@ import { FacilityModule } from './facility/facility.module';
       port: 5432,
       password: 'NextTest2024',
       username: 'next',
-      entities: [],
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
       database: 'next_api',
       synchronize: true,
       logging: true,

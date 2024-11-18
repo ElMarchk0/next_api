@@ -1,26 +1,83 @@
-import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { User } from './entities/user.entity';
+import { Repository } from 'typeorm';
+import { Request } from 'express';
+import { InjectRepository } from '@nestjs/typeorm';
+import { CreateUserDto } from './dto/create-user.dto';
 
 @Injectable()
 export class UserService {
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+  constructor(
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>,
+  ) {}
+
+  // Create a user. Create the the User Id from a PHN
+  public async create(body: CreateUserDto, req: Request): Promise<User> {
+    const { personalHealthNumber, status, canDrink, canEat }: CreateUserDto =
+      body;
+    let user: User = new User();
+    user.personalHealthNumber = personalHealthNumber;
+    user.status = status;
+    user.canDrink = canDrink;
+    user.canEat = canEat;
+    user.admission = new Date();
+    return this.userRepository.save(user);
   }
 
-  findAll() {
-    return `This action returns all user`;
+  async updateStatus(id: string, updateUserDto: UpdateUserDto): Promise<User> {
+    const user = await this.userRepository.findOne({ where: { id } });
+    if (!user) {
+      throw new NotFoundException(`User with ID ${id} not found`);
+    }
+
+    user.status = updateUserDto.status;
+    user.statusUpdated = new Date();
+    return user;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  public async updateCanEat(
+    id: string,
+    updateUserDto: UpdateUserDto,
+  ): Promise<User> {
+    const user = await this.userRepository.findOne({ where: { id } });
+    if (!user) {
+      throw new NotFoundException(`User with ID ${id} not found`);
+    }
+    user.canEat = updateUserDto.canEat;
+    user.statusUpdated = new Date();
+    await this.userRepository.save(user);
+    return user;
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  public async updateCanDrink(
+    id: string,
+    updateUserDto: UpdateUserDto,
+  ): Promise<User> {
+    const user = await this.userRepository.findOne({ where: { id } });
+    if (!user) {
+      throw new NotFoundException(`User with ID ${id} not found`);
+    }
+    user.canDrink = updateUserDto.canDrink;
+    user.statusUpdated = new Date();
+    await this.userRepository.save(user);
+    return user;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async findOne(id: string): Promise<User> {
+    const user = await this.userRepository.findOne({ where: { id } });
+    if (!user) {
+      throw new NotFoundException(`User with ID ${id} not found`);
+    }
+    return user;
+  }
+
+  async remove(id: string): Promise<User> {
+    const user = await this.userRepository.findOne({ where: { id } });
+    if (!user) {
+      throw new NotFoundException(`User with ID ${user.id} not found`);
+    }
+    return this.userRepository.remove(user);
   }
 }

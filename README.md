@@ -4,7 +4,7 @@ This is a demo of the Next API. The concept for the Next App was created by Team
 
 The mobile web app can be found [here](https://github.com/ElMarchk0/next_mobile_ui)
 
-This API is built with Next [Nest](https://github.com/nestjs/nest) and [PostgreSQL](https://www.postgresql.org/)
+This API is built with [NestJS](https://github.com/nestjs/nest) and [PostgreSQL](https://www.postgresql.org/)
 
 ## Project setup
 
